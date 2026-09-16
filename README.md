@@ -1,6 +1,21 @@
-# Analysis of IT jobs in HH.kz
+# Анализ IT-вакансий на hh.kz
 
-## Project architecture
+## Архитектура проекта
+
 1. Backend-part / ETL-pipeline
 
+    * Producer (CLI): Запрос ваканий через REST API hh.kz и отправление JSON-объектов в топик Kafka.
+    * Kafka Broker: Обеспечение буферизации и независимости модулей сбора и обработки.
+    * Consumer: Вычитывание данных из Kafka, произведение очистки и записи в БД и сохранение в PostgreSQL через слой DAO (Data Access Object) для изоляции SQL-логики отбизнес-кода
+
 2. Frontend-part
+
+    * Grafana Dashboard: Готовая панель мониторинга, которая отображает аналитику по медианным зарплатам (в городах), топовым навыкам (Python, SQL, Kafka и т.д.) и динамике публикаций.
+
+## Технологический стек
+
+Язык разработки: Python
+Broker сообщений: Apache Kafka
+База данных: PostgreSQL
+Визуализация: Grafana
+Контейнеризация: Docker, Docker Compose
